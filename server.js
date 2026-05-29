@@ -14,7 +14,7 @@ let tarefas = [
 // Rota GET: listar tarefas
 app.get("/tarefas", (req, res) => {
   res.json({
-    mensagem: "Tarefas carregadas com sucesso",
+    mensagem: "✅ Tarefas carregadas com sucesso",
     total: tarefas.length,
     tarefas: tarefas
   });
@@ -25,7 +25,7 @@ app.post("/tarefas", (req, res) => {
   const { titulo } = req.body;
 
   if (!titulo) {
-    return res.status(400).json({ erro: "Título é obrigatório" });
+    return res.status(400).json({ erro: "❌ Título é obrigatório" });
   }
 
   const novaTarefa = {
@@ -35,7 +35,7 @@ app.post("/tarefas", (req, res) => {
   };
 
   tarefas.push(novaTarefa);
-  res.status(201).json({ mensagem: "Tarefa criada", tarefa: novaTarefa });
+  res.status(201).json({ mensagem: "✨ Tarefa criada", tarefa: novaTarefa });
 });
 
 // Rota PATCH: atualizar tarefa
@@ -45,24 +45,24 @@ app.patch("/tarefas/:id", (req, res) => {
 
   const tarefa = tarefas.find(t => t.id == id);
   if (!tarefa) {
-    return res.status(404).json({ erro: "Tarefa não encontrada" });
+    return res.status(404).json({ erro: "🚫 Tarefa não encontrada" });
   }
 
   tarefa.concluida = concluida;
-  res.json({ mensagem: "Tarefa atualizada", tarefa: tarefa });
+  res.json({ mensagem: "📝 Tarefa atualizada", tarefa: tarefa });
 });
 
 // Rota DELETE: deletar tarefa
 app.delete("/tarefas/:id", (req, res) => {
   const { id } = req.params;
   tarefas = tarefas.filter(t => t.id != id);
-  res.json({ mensagem: "Tarefa deletada" });
+  res.json({ mensagem: "🗑️ Tarefa deletada" });
 });
 
 // Health check
 app.get("/", (req, res) => {
   res.json({
-    status: "API de Tarefas rodando com CI/CD no Render",
+    status: "🚀 API de Tarefas rodando com CI/CD no Render",
     versao: "1.0.1",
     timestamp: new Date().toISOString()
   });
